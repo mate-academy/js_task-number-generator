@@ -30,7 +30,26 @@
  * @param {number} max - (optional)
  */
 function createNumbersGenerator(numbers, min, max) {
-  // write code here
+  let filteredNumbers = [];
+  if (min === undefined && max === undefined && numbers !== undefined) {
+    filteredNumbers = numbers.slice();
+  } else if (numbers !== undefined) {
+    for (const item of numbers) {
+      if (item >= min && item <= max) {
+        filteredNumbers.push(item);
+      }
+    }
+  } else {
+    filteredNumbers = undefined;
+  }
+  let position = 0;
+  return () => {
+    if (filteredNumbers === undefined || position >= filteredNumbers.length) {
+      return undefined;
+    } else {
+      return filteredNumbers[position++];
+    }
+  };
 }
 
 module.exports = createNumbersGenerator;
